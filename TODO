@@ -1,0 +1,82 @@
+✅ Fase 1 – Projeto Base e Autenticação
+Configuração Inicial:
+[ ] Instalar e configurar Tailwind CSS no projeto.
+[ ] Criar src/config/firebaseConfig.js com as credenciais do Firebase.
+[ ] Inicializar Firebase Authentication e Cloud Firestore no seu aplicativo.
+Tela de Login:
+[ ] Implementar a interface da tela de login.
+[ ] Integrar o Login com Google usando Firebase Auth.
+[ ] Implementar lógica para redirecionar usuários logados para a tela de gerenciamento (ou home).
+[ ] Implementar lógica para redirecionar usuários não logados para a tela de login.
+Gerenciamento de Níveis de Permissão (Decisão 1 - Opção B):
+[ ] Criar uma coleção users no Firestore para armazenar informações de usuários, incluindo um campo role (ex: 'admin', 'bibliotecario', 'leitor').
+[ ] Após o login, verificar a role do usuário na coleção users.
+[ ] Implementar lógica para controlar o acesso a certas funcionalidades com base na role (ex: 'leitor' não pode cadastrar/editar livros).
+✅ Fase 2 – Cadastro e Gerenciamento de Livros
+Interface do Formulário de Cadastro:
+[ ] Criar o formulário de cadastro de livros com os campos: Título, Autor, Ano de Publicação, ISBN, Gênero/Categoria, URL da Capa do Livro, Quantidade de Cópias Disponíveis.
+[ ] Adicionar validação básica no front-end para campos obrigatórios (ex: Título, Autor).
+Funcionalidade de Cadastro:
+[ ] Implementar a função para salvar novos livros na coleção livros do Firestore.
+[ ] Garantir que o ISBN seja validado (formato e unicidade, se necessário).
+Exibição da Lista de Livros:
+[ ] Criar a interface para exibir uma lista de todos os livros cadastrados.
+[ ] Implementar um listener em tempo real do Firestore para que a lista seja atualizada automaticamente.
+[ ] Adicionar botões "Editar" e "Excluir" ao lado de cada livro na lista.
+[ ] Implementar as funcionalidades de Edição (preencher formulário com dados existentes, salvar alterações).
+[ ] Implementar a funcionalidade de Exclusão (com confirmação).
+[ ] Controlar a visibilidade dos botões "Editar" e "Excluir" com base na role do usuário logado (ex: apenas 'admin' ou 'bibliotecario' podem editar/excluir).
+✅ Fase 3 – Interface Pública para Consulta e Reserva
+Tela Pública de Consulta:
+[ ] Criar uma página acessível sem login para exibir os livros disponíveis.
+[ ] Apresentar os livros de forma visualmente atraente (com capa, título, autor).
+[ ] Mostrar a Quantidade de Cópias Disponíveis para cada livro.
+Funcionalidades de Busca e Filtro (Decisão 2 - Opção B):
+[ ] Adicionar um campo de busca por Título e/ou Autor.
+[ ] Adicionar filtros por Gênero/Categoria (dropdown ou checkboxes).
+[ ] Adicionar filtros por Ano de Publicação (range ou seleção).
+[ ] Implementar a lógica para filtrar os livros exibidos com base nesses critérios.
+Funcionalidade de Reserva de Livro (Decisão 3 - Opção B):
+[ ] Adicionar um botão "Reservar" para cada livro na lista pública.
+[ ] O botão "Reservar" deve ser desabilitado/invisível se a Quantidade de Cópias Disponíveis for 0.
+[ ] Ao clicar em "Reservar":
+[ ] Verificar se o usuário está logado (redirecionar para login se não estiver, ou exibir mensagem).
+[ ] Decrementa 1 da Quantidade de Cópias Disponíveis do livro no Firestore.
+[ ] Criar um novo documento na coleção reservas com: bookId, userId, reservationDate (data atual), status (ex: 'pendente').
+[ ] Exibir uma mensagem de sucesso/falha ao usuário.
+✅ Fase 4 – Sistema de Empréstimos e Devoluções
+Tela de Empréstimo de Livros:
+[ ] Criar uma interface para registrar empréstimos (acessível apenas por usuários com permissão, ex: 'bibliotecario').
+[ ] Campos necessários: Identificação do Livro (ex: busca por ISBN ou Título), Identificação do Leitor (ex: Nome, ID do Leitor).
+[ ] Ao registrar o empréstimo:
+[ ] Decrementar a Quantidade de Cópias Disponíveis do livro no Firestore.
+[ ] Criar um novo documento na coleção emprestimos com: bookId, readerId (ou readerName), loanDate (data atual), dueDate (data de devolução prevista, ex: +14 dias), status ('Emprestado').
+Tela de Devolução de Livros:
+[ ] Criar uma interface para registrar devoluções (acessível apenas por usuários com permissão).
+[ ] Campo necessário: Identificação do Livro ou do Empréstimo (para facilitar a busca).
+[ ] Ao registrar a devolução:
+[ ] Incrementar a Quantidade de Cópias Disponíveis do livro no Firestore.
+[ ] Atualizar o documento de empréstimo correspondente na coleção emprestimos: definir returnDate (data real de devolução) e mudar status para 'Devolvido'.
+Visualização de Logs de Empréstimos:
+[ ] Criar uma seção para listar todos os empréstimos e devoluções (histórico).
+[ ] Permitir filtrar por status (ex: 'Emprestados Atualmente', 'Atrasados', 'Devolvidos').
+✅ Fase 5 – Organização, Validações e Otimizações
+Estrutura de Código:
+[ ] Organizar os arquivos JavaScript em pastas lógicas:
+src/auth/: Lógica de autenticação.
+src/services/: Funções de interação com o Firebase (ex: firestoreService.js, authService.js).
+src/components/: Componentes reutilizáveis (se usar Alpine.js).
+src/views/: Scripts específicos para cada "página" ou "tela".
+src/utils/: Funções utilitárias diversas.
+Validações Robustas:
+[ ] Implementar validações mais completas no front-end para todos os formulários (cadastro de livros, empréstimo, etc.).
+[ ] Escrever e configurar as Regras de Segurança do Firestore:
+Definir permissões de leitura/escrita para as coleções livros, users, reservas, emprestimos com base na role do usuário.
+Garantir que apenas dados válidos possam ser escritos (ex: ISBN formatado, ano numérico, quantidade positiva).
+Componentização com Alpine.js:
+[ ] Identificar elementos da UI que podem ser transformados em componentes Alpine (ex: formulário de livro, card de livro, modais).
+[ ] Refatorar o código para usar a reatividade do Alpine onde for útil.
+Tratamento de Erros:
+[ ] Implementar mensagens de erro amigáveis para o usuário em caso de falha nas operações (Firebase, validação, etc.).
+Responsividade:
+[ ] Garantir que todas as telas sejam responsivas e funcionem bem em diferentes tamanhos de tela (desktop, tablet, mobile) usando Tailwind.

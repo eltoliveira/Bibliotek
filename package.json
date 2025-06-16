@@ -1,0 +1,19 @@
+{
+  "name": "bibliotek",
+  "version": "1.0.0",
+  "description": "Sistema escolar para biblioteca",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eltoliveira/Bibliotek.git"
+  },
+  "author": "Elton de Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eltoliveira/Bibliotek/issues"
+  },
+  "homepage": "https://github.com/eltoliveira/Bibliotek#readme"
+}
