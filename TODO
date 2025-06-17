@@ -1,14 +1,13 @@
 ✅ Fase 1 – Projeto Base e Autenticação
 Configuração Inicial:
-[ ] Instalar e configurar Tailwind CSS no projeto.
-[ ] Criar src/config/firebaseConfig.js com as credenciais do Firebase.
-[ ] Inicializar Firebase Authentication e Cloud Firestore no seu aplicativo.
+[X] Instalar e configurar Tailwind CSS no projeto.
+[X] Criar src/config/firebaseConfig.js com as credenciais do Firebase.
+[X] Inicializar Firebase Authentication e Cloud Firestore no seu aplicativo.
 Tela de Login:
 [ ] Implementar a interface da tela de login.
 [ ] Integrar o Login com Google usando Firebase Auth.
 [ ] Implementar lógica para redirecionar usuários logados para a tela de gerenciamento (ou home).
 [ ] Implementar lógica para redirecionar usuários não logados para a tela de login.
-Gerenciamento de Níveis de Permissão (Decisão 1 - Opção B):
 [ ] Criar uma coleção users no Firestore para armazenar informações de usuários, incluindo um campo role (ex: 'admin', 'bibliotecario', 'leitor').
 [ ] Após o login, verificar a role do usuário na coleção users.
 [ ] Implementar lógica para controlar o acesso a certas funcionalidades com base na role (ex: 'leitor' não pode cadastrar/editar livros).
